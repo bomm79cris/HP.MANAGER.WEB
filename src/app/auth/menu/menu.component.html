@@ -1,0 +1,26 @@
+<div class="navbar navbar-expand-lg navbar-light custom-navbar">
+    <div class="container-fluid">
+      <!-- Título de la página alineado a la izquierda -->
+      <a class="navbar-brand" href="#">HP-Manager</a>
+  
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item" *ngFor="let item of menuItems">
+          <a
+            *ngIf="isVisible(item.role)"
+            class="nav-link"
+            [routerLink]="item.path"
+            pTooltip="{{ item.label }}"
+            tooltipPosition="top"
+          >
+            <i [class]="item.icon"></i> <!-- Ícono del item -->
+          </a>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" (click)="logout()" pTooltip="Logout" tooltipPosition="top">
+            <i class="pi pi-sign-out"></i> 
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  

@@ -1,0 +1,43 @@
+/* Menú fijo en la parte superior con color naranja */
+.custom-navbar {
+    background-color: #ff5722; /* Fondo naranja */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  /* Barra de navegación con íconos blancos y texto en blanco */
+  .navbar-nav .nav-item .nav-link {
+    color: white !important; /* Texto blanco */
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  
+  /* Estilo para los íconos */
+  .navbar-nav .nav-item i {
+    margin-right: 8px; /* Espacio entre ícono y texto */
+  }
+  
+  /* Efecto hover en los elementos del menú */
+  .navbar-nav .nav-item .nav-link:hover {
+    background-color: #e64a19; /* Color de fondo al pasar el mouse (más oscuro) */
+  }
+  
+  /* Tooltip personalizado */
+  .p-tooltip {
+    background-color: #ff5722 !important;
+    color: white !important;
+    font-size: 12px;
+    border-radius: 5px;
+  }
+  /* Título de la página */
+.navbar-brand {
+    font-size: 1.5em; /* Tamaño de la fuente */
+    font-weight: bold; /* Negrita */
+    color: white !important; /* Color blanco */
+    text-transform: uppercase; /* Opcional: para que el texto esté en mayúsculas */
+  }
+  

@@ -1,0 +1,168 @@
+.estudiantes {
+    height: 80vh; /* Ajustar el contenedor para que ocupe el 93% de la altura de la ventana */
+    background-color: #f5f5f5; /* Fondo claro */
+    display: flex;
+    flex-direction: column; /* Para asegurarse de que el contenido se apile verticalmente */
+    border-radius: 12px; /* Aumentar el valor para hacerlo más redondo */
+    border: 2px solid #ccc; /* Borde de 2px de grosor y color gris claro */
+}
+
+.p-datatable {
+    flex: 1; /* Esto hace que la tabla ocupe todo el espacio disponible */
+    overflow: auto; /* Permite que la tabla sea desplazable si hay más contenido */
+    width: 100%; /* Asegura que la tabla ocupe el 100% del contenedor */
+}
+
+.p-datatable-tbody {
+    overflow-y: auto; /* Habilita el desplazamiento vertical */
+    max-height: 60vh; /* Puedes ajustar este valor según lo que necesites */
+}
+:host ::ng-deep {
+    .p-datatable {
+        width: 100% !important;
+    }
+
+    .p-datatable-thead > tr > th {
+        background-color: #f5f5f5 !important;
+    }
+
+    .p-datatable-tbody > tr > td {
+        padding: 1rem !important;
+        font-size: 1rem !important;
+    }
+}
+
+:host ::ng-deep {
+    /* Aplica los estilos a la tabla */
+    .p-datatable {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Estilo para las filas */
+    .p-datatable-tbody > tr {
+        cursor: pointer;
+    }
+
+    /* Estilo para la cabecera */
+    .p-datatable-thead > tr > th {
+        background-color: #f5f5f5;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    /* Estilo para las celdas de la tabla */
+    .p-datatable-tbody > tr > td {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+}
+
+:host ::ng-deep {
+    /* Estilo para el paginador */
+    .p-paginator {
+        .p-paginator-current {
+            margin-left: auto;
+        }
+    }
+
+    /* Estilo para las barras de progreso */
+    .p-progressbar {
+        height: .5rem;
+        background-color: #D8DADC;
+    
+        .p-progressbar-value {
+            background-color: #607D8B;
+        }
+    }
+    
+    /* Cabecera de la tabla */
+    .table-header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    /* Estilo para el calendario */
+    .p-calendar .p-datepicker {
+        min-width: 25rem;
+    
+        td {
+            font-weight: 400;
+        }
+    }
+
+    /* Estilos específicos para el datatable */
+    .p-datatable.p-datatable-customers {
+        .p-datatable-header {
+            padding: 1rem;
+            text-align: left;
+            font-size: 1.5rem;
+        }
+    
+        .p-paginator {
+            padding: 1rem;
+        }
+    
+        .p-datatable-thead > tr > th {
+            text-align: left;
+        }
+    
+        .p-datatable-tbody > tr > td {
+            cursor: auto;
+        }
+    
+        .p-dropdown-label:not(.p-placeholder) {
+            text-transform: uppercase;
+        }
+    }
+
+    /* Estilo para la tabla completa con el 100% de ancho */
+    .p-w-100 {
+        width: 100%;
+    }
+
+    /* Responsive */
+    .p-datatable-customers .p-datatable-tbody > tr > td .p-column-title {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 960px) {
+    :host ::ng-deep {
+        /* Estilos para el datatable en pantallas pequeñas */
+        .p-datatable {
+            &.p-datatable-customers {
+                .p-datatable-thead > tr > th,
+                .p-datatable-tfoot > tr > td {
+                    display: none !important;
+                }
+    
+                .p-datatable-tbody > tr {
+                    border-bottom: 1px solid var(--layer-2);
+    
+                    > td {
+                        text-align: left;
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        border: 0 none;
+    
+                        .p-column-title {
+                            min-width: 30%;
+                            display: inline-block;
+                            font-weight: bold;
+                        }
+        
+                        p-progressbar {
+                            width: 100%;
+                        }
+
+                        &:last-child {
+                            border-bottom: 1px solid var(--surface-d);
+                        }
+                    }
+                }
+            }
+        }
+    } 
+}

@@ -1,0 +1,22 @@
+.detalle-cita-dialog .dialog-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+
+
+.field-label {
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #6b6b6b;
+}
+
+.field-value {
+    font-size: 1em;
+    color: #333;
+}
+
+.footer-buttons button {
+    margin: 0.5rem 0.2rem;
+}

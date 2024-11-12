@@ -1,0 +1,11 @@
+
+/* Estilo para el área de contenido */
+.content {
+    flex-grow: 1; /* Hace que el contenido ocupe el espacio restante */
+    padding: 87px;
+    overflow-y: auto; /* Permite el desplazamiento si el contenido es más grande que la ventana */
+    background-color: #f5f5f5;
+    border-radius: 1px;
+    border: 2px solid #ccc; /* Borde de 2px de grosor y color gris claro */
+  }
+  

@@ -1,0 +1,237 @@
+<p-table
+    #dt1
+    [value]="citas"
+    [globalFilterFields]="['nombreEstudiante', 'motivo', 'fechaHora', 'nombreEstado']"
+    dataKey="citaId"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    [rows]="5"
+    [paginator]="true"
+    stateStorage="session"
+    stateKey="citasTable-session"
+    [rowHover]="true">
+    
+    <!-- Campo de búsqueda global -->
+    <ng-template pTemplate="caption">
+        <p-iconField iconPosition="left">
+            <p-inputIcon>
+                <i class="pi pi-search"></i>
+            </p-inputIcon>
+            <input 
+                pInputText type="text" 
+                (input)="onSearch($event,dt1)" 
+                placeholder="Buscar..." />
+        </p-iconField>
+        <button pButton label="Crear Cita" icon="pi pi-plus" (click)="showForm()" class="p-button-text"></button>    </ng-template>
+
+    <!-- Encabezados de columnas con opciones de ordenamiento -->
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="nombreEstudiante" style="width:25%">
+                Nombre del Estudiante <p-sortIcon field="nombreEstudiante" />
+            </th>
+            <th pSortableColumn="motivo" style="width:25%">
+                Motivo <p-sortIcon field="motivo" />
+            </th>
+            <th pSortableColumn="fechaHora" style="width:25%">
+                Fecha <p-sortIcon field="fechaHora" />
+            </th>
+            <th pSortableColumn="nombreEstado" style="width:25%">
+                Estado <p-sortIcon field="nombreEstado" />
+            </th>
+            <th pSortableColumn="soyElSolicitante" style="width:25%">
+                ¿Soy el solicitante?<p-sortIcon field="soyElSolicitante" />
+            </th>
+        </tr>
+    </ng-template>
+
+    <!-- Cuerpo de la tabla -->
+    <ng-template pTemplate="body" let-cita>
+        <tr class="p-selectable-row" (click)="showCitaDetail(cita)">
+            <td>
+                <span class="p-column-title">Nombre del Estudiante</span>
+                {{ cita.nombreEstudiante }}
+            </td>
+            <td>
+                <span class="p-column-title">Motivo</span>
+                {{ cita.motivo }}
+            </td>
+            <td>
+                <span class="p-column-title">Fecha</span>
+                {{ cita.fechaHora | date:'dd/MM/yyyy, HH:mm' }}
+            </td>
+            <td>
+                <span class="p-column-title">Estado</span>
+                <p-tag [value]="cita.nombreEstado" [severity]="getSeverity(cita.nombreEstado)" />
+            </td>
+            <td>
+                <span class="p-column-title">Acciones</span>
+                {{cita.esCancelable?'Si':'No'}}
+            </td>
+        </tr>
+    </ng-template>
+
+    <!-- Mensaje cuando no hay registros -->
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="4">No hay citas registradas.</td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-dialog 
+    header="Detalle de Cita" 
+    [(visible)]="displayModal" 
+    [modal]="true" 
+    (onHide)="closeModal()" 
+    [closable]="true" 
+    [style]="{ width: '600px', maxWidth: '90vw' }"
+    class="detalle-cita-dialog"
+>
+    <!-- Contenedor de tres columnas -->
+    <div class="p-grid p-fluid p-p-3 dialog-content" style="background-color: #f9f9f9; border-radius: 8px;">
+        <!-- Columna 1 -->
+        <div class="p-col-4 p-p-2 field-container">
+            <div class="field-item">
+                <label class="field-label">Nombre del Estudiante</label>
+                <p class="field-value">{{ selectedCita?.nombreEstudiante || 'No especificado' }}</p>
+            </div>
+            <div class="field-item">
+                <label class="field-label">Fecha y Hora</label>
+                <p class="field-value">{{ selectedCita?.fechaHora | date:'dd/MM/yyyy, HH:mm' }}</p>
+            </div>
+            <div class="field-item">
+                <label class="field-label">Debe ir el Padre</label>
+                <p class="field-value">{{ selectedCita?.debeIrPadre ? 'Sí' : 'No' }}</p>
+            </div>
+        </div>
+
+        <!-- Columna 2 -->
+        <div class="p-col-4 p-p-2 field-container">
+            <div class="field-item">
+                <label class="field-label">Psicólogo</label>
+                <p class="field-value">{{ selectedCita?.nombrePsicologo || 'No asignado' }}</p>
+            </div>
+            <div class="field-item">
+                <label class="field-label">Estado</label>
+                <p class="field-value">{{ selectedCita?.nombreEstado || 'No especificado' }}</p>
+            </div>
+            <div class="field-item">
+                <label class="field-label">Solicitado Por</label>
+                <p class="field-value">{{ selectedCita?.solicitadoPor || 'No especificado' }}</p>
+            </div>
+        </div>
+
+        <!-- Columna 3 -->
+        <div class="p-col-4 p-p-2 field-container">
+            <div class="field-item">
+                <label class="field-label">Motivo</label>
+                <p class="field-value">{{ selectedCita?.motivo || 'No especificado' }}</p>
+            </div>
+            <div class="field-item">
+                <label class="field-label">Descripción</label>
+                <p class="field-value">{{ selectedCita?.descripcion || 'Sin descripción' }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer con botones de acción alineados a la derecha -->
+    <p-footer>
+        <div class="p-d-flex p-jc-end p-ai-center footer-buttons">
+            <button 
+                pButton 
+                label="Editar Decisión" 
+                *ngIf="!selectedCita?.esCancelable && selectedCita?.estadoID !== 1 && selectedCita?.estadoID !== 4" 
+                icon="pi pi-pencil" 
+                (click)="cambiarEstado(1)" 
+                class="p-button-text"
+            ></button>
+            <button 
+                pButton 
+                label="Aceptar" 
+                *ngIf="!selectedCita?.esCancelable && selectedCita?.estadoID === 1" 
+                icon="pi pi-check" 
+                (click)="cambiarEstado(2)" 
+                class="p-button-text"
+            ></button>
+            <button 
+                pButton 
+                label="Rechazar" 
+                *ngIf="!selectedCita?.esCancelable && selectedCita?.estadoID === 1" 
+                icon="pi pi-ban" 
+                (click)="cambiarEstado(3)" 
+                class="p-button-text"
+            ></button>
+            <button 
+                pButton 
+                label="Cancelar Cita" 
+                *ngIf="selectedCita?.esCancelable && selectedCita?.estadoID !== 4" 
+                icon="pi pi-times" 
+                (click)="cambiarEstado(4)" 
+                class="p-button-text"
+            ></button>
+            <button 
+                pButton 
+                label="Editar" 
+                *ngIf="selectedCita?.esCancelable && selectedCita?.estadoID !== 4" 
+                icon="pi pi-pencil" 
+                (click)="showForm()" 
+                class="p-button-text"
+            ></button>
+            <button 
+                pButton 
+                label="Cerrar" 
+                icon="pi pi-times" 
+                (click)="closeModal()" 
+                class="p-button-text"
+            ></button>
+        </div>
+    </p-footer>
+</p-dialog>
+
+<p-dialog header="{{selectedCita ? 'Editar Cita' : 'Crear Cita'}}" [(visible)]="displayModalForm" [modal]="true" (onHide)="closeModalForm()" [closable]="true" [style]="{width: '50vw'}">
+    <div class="p-fluid">
+        
+        <div class="p-field" *ngIf="usuario.RolNombre=='Psicologo'">
+            <label for="nombreEstudiante">Nombre del Estudiante:</label>
+            <p-autoComplete
+            [suggestions]="suggestionsStudents"
+            (completeMethod)="filterStudents($event)"
+            optionLabel="nombreEstudiante" 
+            [(ngModel)]="selectedEstudiante"
+            placeholder="Buscar Estudiante"/>
+        </div>
+        <div class="p-field" *ngIf="usuario.RolNombre=='Estudiante'">
+            <label for="nombrePsicologo">Nombre del Psicologo:</label>
+            <p-autoComplete
+            [suggestions]="suggestionPsicologo"
+            (completeMethod)="filterPsicologos($event)"
+            optionLabel="nombrePsicologo" 
+            [(ngModel)]="selectedPsicologo"
+            placeholder="Buscar Psicologo"/>
+            
+        </div>
+        <div class="p-field">
+            <label for="motivo">Motivo:</label>
+            <input id="motivo" pInputText [(ngModel)]="updatecitaform.motivo" />
+        </div>
+        <div class="p-field">
+            <label for="fechaHora">Fecha y Hora:</label>
+            <p-calendar id="fechaHora" [(ngModel)]="updatecitaform.fechaHora"[showTime]="true" 
+            [hourFormat]="'24'"[style]="{'width':'100%'}" ></p-calendar>
+        </div>
+        <div class="p-field">
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" pInputTextarea [(ngModel)]="updatecitaform.descripcion" rows="5"></textarea>
+        </div>
+        <div class="p-field">
+            <label for="debeIrPadre">Debe ir el Padre:</label>
+            <p-checkbox id="debeIrPadre" [(ngModel)]="updatecitaform.debeIrPadre" [binary]="true" 
+            inputId="binary"></p-checkbox>
+        </div>
+    </div>
+    <p-footer>
+        <button pButton label="Guardar" icon="pi pi-check" (click)="saveForm()" class="p-button-text"></button>
+        <button pButton label="Cancelar" icon="pi pi-times" (click)="closeModalForm()" class="p-button-text"></button>
+    </p-footer>
+</p-dialog>
+

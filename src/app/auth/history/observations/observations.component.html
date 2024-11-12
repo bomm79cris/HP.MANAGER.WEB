@@ -1,0 +1,51 @@
+<div class="card">
+    <h2>Observaciones</h2>
+    <button pButton label="Agregar Observación" icon="pi pi-plus" (click)="openModal()" *ngIf="isVisible()"></button>
+
+    <p-table [value]="observaciones" [scrollable]="true" scrollHeight="50vh" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Fecha</th>
+                <th>Descripcion</th>
+                <th>Observaciones</th>
+                <th>Psicologo</th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-observacion>
+            <tr>
+                <td>{{ observacion.fecha | date:'dd/MM/yyyy' }}</td>
+                <td>{{ observacion.descripcion }}</td>
+                <td>{{ observacion.observaciones }}</td>
+                <td>{{ observacion.nombrePsicologo }}</td>
+            </tr>
+        </ng-template>
+
+        <!-- Mensaje cuando no hay registros -->
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="4" style="text-align: center; color: gray;">
+                    No hay observaciones registradas para este estudiante.
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    
+    <p-dialog header="Agregar Observación" [(visible)]="displayModal" [modal]="true" [closable]="true" [style]="{width: '50vw'}">
+        <div class="p-fluid">
+            <div class="p-field">
+                <label for="descripcion">Descripción</label>
+                <input id="descripcion" type="text" pInputText [(ngModel)]="newObservation.descripcion" />
+            </div>
+            <div class="p-field">
+                <label for="observacion">Observación</label>
+                <textarea id="observacion" rows="4" pInputTextarea [(ngModel)]="newObservation.observaciones"></textarea>
+            </div>
+        </div>
+        <p-footer>
+            <button pButton label="Cancelar" icon="pi pi-times" (click)="closeModal()" class="p-button-text"></button>
+            <button pButton label="Guardar" icon="pi pi-check" (click)="addObservation()" [disabled]="!newObservation.descripcion || !newObservation.observaciones"></button>
+        </p-footer>
+    </p-dialog>
+</div>
