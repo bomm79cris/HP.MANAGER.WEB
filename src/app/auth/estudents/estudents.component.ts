@@ -34,7 +34,7 @@ export class EstudentsComponent implements OnInit {
               this.loading = false;  
             }
           );
-        }else if(user.RolNombre==Role.Psicologo) { 
+        }else if(user.RolNombre==Role.Psicologo ||user.RolNombre==Role.Docente  ) { 
           this.estudianteService.getEstudiantes().subscribe(
             (data: EstudianteModel[]) => {
               this.estudiantes = data;  

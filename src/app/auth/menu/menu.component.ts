@@ -21,8 +21,8 @@ export class MenuComponent implements OnInit {
       { label: 'Listar Historia Clinica', path: '/autorizado/history-component/'+this.userId, role: 'Estudiante', icon: 'pi pi-book' },
       { label: 'Citas Programadas', path: '/autorizado/citas-programadas', role: 'Psicologo', icon: 'pi pi-calendar' },
       { label: 'Citas Programadas', path: '/autorizado/citas-programadas', role: 'Estudiante', icon: 'pi pi-calendar' },
-      { label: 'Comportamientos', path: '/autorizado/comportamientos', role: 'Psicologo', icon: 'pi pi-flag' },
-      { label: 'Comportamientos', path: '/autorizado/comportamientos', role: 'Docente', icon: 'pi pi-flag' },
+      { label: 'Recomendaciones', path: '/autorizado/recomendaciones', role: 'Psicologo', icon: 'pi pi-flag' },
+      { label: 'Listar Estudiantes', path: '/autorizado/listar-estudiantes', role: 'Docente', icon: 'pi pi-users' },
       { label: 'Recomendaciones', path: '/autorizado/recomendaciones', role: 'Docente', icon: 'pi pi-lightbulb' },
       { label: 'Sesiones', path: '/autorizado/sesiones', role: 'Psicologo', icon: 'pi pi-video' }
     ];
