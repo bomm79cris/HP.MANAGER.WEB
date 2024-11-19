@@ -1,0 +1,83 @@
+<div class="p-mb-4" *ngIf="RolId==4">
+    <p-button 
+      label="Crear Comportamiento" 
+      icon="pi pi-plus" 
+      class="p-button-success" 
+      (click)="abrirDialogoCrear()"
+    ></p-button>
+  </div>
+  <p-dialog 
+  [(visible)]="dialogoVisible" 
+  [header]="esEdicion ? 'Editar Comportamiento' : 'Crear Comportamiento'" 
+  [modal]="true" 
+  [closable]="true" 
+  [style]="{ width: '30vw' }"
+>
+  <div class="p-fluid">
+    <div class="field">
+      <label for="observaciones">Observaciones</label>
+      <input 
+        id="observaciones" 
+        type="text" 
+        pInputText 
+        [(ngModel)]="comportamientoActual.observaciones"
+      />
+    </div>
+  </div>
+  <div class="p-dialog-footer">
+    <p-button 
+      label="Guardar" 
+      icon="pi pi-check" 
+      (click)="guardarComportamiento()" 
+      class="p-button-success"
+    ></p-button>
+    <p-button 
+      label="Cancelar" 
+      icon="pi pi-times" 
+      (click)="cerrarDialogo()" 
+      class="p-button-secondary"
+    ></p-button>
+  </div>
+</p-dialog>  
+  <!-- Contenedor con scroll -->
+  <div class="comportamientos-container">
+    <div *ngFor="let comportamiento of comportamientos">
+      <br />
+      <br />
+      <p-panel [toggleable]="true">
+        <ng-template pTemplate="header">
+          <div class="flex align-items-center gap-2">
+            <p-avatar 
+              image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" 
+              size="large" 
+              shape="circle" 
+            ></p-avatar>
+            <span class="font-bold">{{ comportamiento.docenteFullName }}</span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <div class="flex flex-wrap align-items-center justify-content-between gap-3">
+            <div class="flex align-items-center gap-2">
+              <p-button icon="pi pi-user" rounded="true" text="true"></p-button>
+              <p-button icon="pi pi-bookmark" severity="secondary" rounded="true" text="true"></p-button>
+            </div>
+            <span class="p-text-secondary">
+              Creado el {{ comportamiento.createdAt | date: 'medium' }}
+            </span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="icons" *ngIf=" comportamiento.soyElCreador">
+          <button class="p-panel-header-icon p-link mr-2" (click)="menu.toggle($event)">
+            <span class="pi pi-cog"></span>
+          </button>
+          <p-menu  
+            #menu 
+            id="config_menu" 
+            [model]="crearItemsMenu(comportamiento)" 
+            [popup]="true"></p-menu>
+        </ng-template>
+        <p class="m-0">{{ comportamiento.observaciones }}</p>
+      </p-panel>
+    </div>
+  </div>
+  

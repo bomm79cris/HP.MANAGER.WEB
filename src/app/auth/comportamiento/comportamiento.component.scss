@@ -1,0 +1,12 @@
+.comportamientos-container {
+    max-height: 400px; /* Cambia el valor según lo que necesites */
+    overflow-y: auto; /* Habilita el scroll vertical */
+    overflow-x: hidden; /* Oculta el scroll horizontal si se genera */
+    padding-right: 1rem; /* Opcional: añade espacio para evitar que el contenido toque la barra de scroll */
+  }
+  @media (max-width: 768px) {
+    .comportamientos-container {
+      max-height: 300px;
+    }
+  }
+    

@@ -30,8 +30,12 @@ import { CitaComponent } from './cita/cita.component';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { CalendarModule } from 'primeng/calendar';
 import { CheckboxModule } from 'primeng/checkbox';
-
-
+import { ComportamientoComponent } from './comportamiento/comportamiento.component';
+import { RecomendacionesComponent } from './recomendaciones/recomendaciones.component';
+import { SesionComponent } from './sesion/sesion.component';
+import { PanelModule } from 'primeng/panel';
+import { AvatarModule } from 'primeng/avatar';
+import {MenuModule} from 'primeng/menu'
 @NgModule({
   declarations: [
     MenuComponent,
@@ -41,7 +45,10 @@ import { CheckboxModule } from 'primeng/checkbox';
     HistoryComponent,
     ObservationsComponent,
     TratamientosComponent,
-    CitaComponent
+    CitaComponent,
+    ComportamientoComponent,
+    RecomendacionesComponent,
+    SesionComponent
   ],
   imports: [
     CommonModule,
@@ -67,7 +74,10 @@ import { CheckboxModule } from 'primeng/checkbox';
     ReactiveFormsModule,
      AutoCompleteModule,
      CalendarModule,
-     CheckboxModule
+     CheckboxModule,
+     PanelModule,
+     AvatarModule,
+     MenuModule
   ],
   exports: [MenuComponent,FooterComponent],
   providers: [ConfirmationService]
