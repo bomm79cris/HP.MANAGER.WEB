@@ -36,12 +36,12 @@ export class SesionComponent {
   ngOnInit() {
     this.estudianteService.getEstudiantes().subscribe(
       (data)=>{
-        this.estudiantes=data
+        this.estudiantes=data.reverse()
       }
     );
     this.estudianteService.getPsicologos().subscribe(
       (data)=>{
-        this.psicologos=data
+        this.psicologos=data.reverse()
       }
     )
 
@@ -153,7 +153,8 @@ filterEstudianteMetodo(event: AutoCompleteCompleteEvent) {
      this.sesionService.crearSesion(nuevaSesion).subscribe(
       (data)=>{
         this.sesion.sesionID=data.sesionID
-
+        this.sesion.psicologoNombre=this.psicologos.find(p=>p.psicologoID==data.psicologoID).nombrePsicologo
+        this.sesion.estudianteNombre=this.estudiantes.find(p=>p.estudianteId==data.estudianteID).nombreEstudiante,
         this.sesions.push(this.sesion);
         this.sesions = [...this.sesions];
         this.sesionDialog = false;
