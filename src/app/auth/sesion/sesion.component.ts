@@ -155,7 +155,8 @@ filterEstudianteMetodo(event: AutoCompleteCompleteEvent) {
         this.sesion.sesionID=data.sesionID
         this.sesion.psicologoNombre=this.psicologos.find(p=>p.psicologoID==data.psicologoID).nombrePsicologo
         this.sesion.estudianteNombre=this.estudiantes.find(p=>p.estudianteId==data.estudianteID).nombreEstudiante,
-        this.sesions = [this.sesion,...this.sesions];
+        this.sesions.push(this.sesion);
+        this.sesions = [...this.sesions];
         this.sesionDialog = false;
         this.sesion = <Sesion>{};
     
