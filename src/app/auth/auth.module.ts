@@ -25,7 +25,7 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TratamientosComponent } from './history/tratamientos/tratamientos.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { CitaComponent } from './cita/cita.component';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { CalendarModule } from 'primeng/calendar';
@@ -35,7 +35,14 @@ import { RecomendacionesComponent } from './recomendaciones/recomendaciones.comp
 import { SesionComponent } from './sesion/sesion.component';
 import { PanelModule } from 'primeng/panel';
 import { AvatarModule } from 'primeng/avatar';
-import {MenuModule} from 'primeng/menu'
+import {MenuModule} from 'primeng/menu';
+import { RippleModule } from 'primeng/ripple';
+import { ToastModule } from 'primeng/toast';
+import { ToolbarModule } from 'primeng/toolbar';
+import { FileUploadModule } from 'primeng/fileupload';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { RatingModule } from 'primeng/rating';
+import { InputNumberModule } from 'primeng/inputnumber';
 @NgModule({
   declarations: [
     MenuComponent,
@@ -77,9 +84,17 @@ import {MenuModule} from 'primeng/menu'
      CheckboxModule,
      PanelModule,
      AvatarModule,
-     MenuModule
+     MenuModule,
+     RippleModule,
+     ToastModule,
+     ToolbarModule,
+     FileUploadModule,
+     RadioButtonModule,
+     RatingModule,
+     InputNumberModule
+     
   ],
   exports: [MenuComponent,FooterComponent],
-  providers: [ConfirmationService]
+  providers: [ConfirmationService,MessageService ]
 })
 export class AuthModule { }

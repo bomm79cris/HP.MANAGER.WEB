@@ -5,6 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { EstudentsComponent } from './estudents/estudents.component';
 import { HistoryComponent } from './history/history.component';
 import { CitaComponent } from './cita/cita.component';
+import { SesionComponent } from './sesion/sesion.component';
 
 
 
@@ -13,7 +14,8 @@ const routes: Routes = [{path: '',component: AuthComponent,children: [
         { path: 'listar-estudiantes', component: EstudentsComponent },
         { path: 'listar-hijos', component: EstudentsComponent },
         { path: 'history-component/:estudianteId', component: HistoryComponent },
-        {path:'citas-programadas',component:CitaComponent}
+        {path:'citas-programadas',component:CitaComponent},
+        {path:'sesiones',component:SesionComponent}
       ]
     }
   ];
