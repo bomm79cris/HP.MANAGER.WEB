@@ -28,7 +28,7 @@
 
     <p-table
         #dt
-        [value]="sesions"
+        [value]="sesions.reverse()"
         [rows]="10"
         [paginator]="true"
         [globalFilterFields]="['psicologo', 'country.psicologo', 'representative.psicologo', 'status']"
