@@ -23,6 +23,7 @@ export class SesionComponent {
   selectedsesions!: Sesion[] | null;
 
   submitted: boolean = false;
+  edit:boolean=false;
 
   statuses!: any[];
   user:any;
@@ -99,8 +100,8 @@ filterEstudianteMetodo(event: AutoCompleteCompleteEvent) {
   }
 
 
-  editsesion(sesion: Sesion) {
-    
+  editsesion() {
+    var sesion=this.sesion
       var nuevaSesion:SaveSesiones={aspectosAMejorar:sesion.aspectosAMejorar,descripcion:sesion.descripcion,estudianteID:sesion.estudianteID,fechaHora:new Date(),objetivoAlcanzado:sesion.objetivoAlcanzado,psicologoID:sesion.psicologoID}
       if(this.user.RolId==1){
         nuevaSesion.psicologoID=this.user.sub
@@ -134,6 +135,7 @@ filterEstudianteMetodo(event: AutoCompleteCompleteEvent) {
   }
 
   hideDialog() {
+    this.edit=false
       this.sesionDialog = false;
       this.submitted = false;
   }
@@ -151,8 +153,7 @@ filterEstudianteMetodo(event: AutoCompleteCompleteEvent) {
      this.sesionService.crearSesion(nuevaSesion).subscribe(
       (data)=>{
         this.sesion.sesionID=data.sesionID
-        this.sesion.psicologoNombre=data.psicologoNombre,
-        this.sesion.estudianteNombre=data.estudianteNombre,
+
         this.sesions.push(this.sesion);
         this.sesions = [...this.sesions];
         this.sesionDialog = false;
@@ -173,5 +174,10 @@ filterEstudianteMetodo(event: AutoCompleteCompleteEvent) {
 
       return index;
   }
-
+openEdit(sesion:Sesion){
+  this.sesion=<Sesion>{}
+  this.sesion={...sesion}
+  this.edit=true;
+  this.sesionDialog = true;
+}
 }

@@ -72,12 +72,12 @@
                 <td>
                     <p-tableCheckbox [value]="sesion" />
                 </td>
-                <td  *ngIf="user.RolId==1">
+                <td  *ngIf="user.RolId==3">
                     {{ sesion.psicologoNombre }}
                 </td>
                 
              
-                <td  *ngIf="user.RolId==3">
+                <td  *ngIf="user.RolId==1">
                     {{ sesion.estudianteNombre  }}
                 </td>
                 <td>
@@ -96,7 +96,7 @@
                         [rounded]="true" 
                         [outlined]="true" 
                         severity="success" 
-                        (onClick)="openNew()" />
+                        (onClick)="openEdit(sesion)" />
                     <p-button 
                         icon="pi pi-trash" 
                         severity="danger" 
@@ -186,12 +186,18 @@
             [text]="true" 
             (onClick)="hideDialog()" 
         ></p-button>
-        <p-button
+        <p-button  *ngIf="!edit"
             label="Guardar" 
             icon="pi pi-check" 
             [text]="true" 
             (onClick)="savesesion()" 
         ></p-button>
+        <p-button *ngIf="edit"
+        label="Guardar" 
+        icon="pi pi-check" 
+        [text]="true" 
+        (onClick)="editsesion()" 
+    ></p-button>
     </ng-template>
 </p-dialog>
 
