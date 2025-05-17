@@ -17,7 +17,7 @@ export class MenuComponent implements OnInit {
     this.userId=authService.getUserFromToken().sub;
     this.menuItems= [
       { label: 'Listar Estudiantes', path: '/autorizado/listar-estudiantes', role: 'Psicologo', icon: 'pi pi-users' },
-      { label: 'Listar Hijos', path: '/autorizado/listar-hijos', role: 'Padre', icon: 'pi pi-user-plus' },
+      { label: 'Listar Hijos', path: '/autorizado/listar-hijos', role: 'Padre de Familia', icon: 'pi pi-user-plus' },
       { label: 'Listar Historia Clinica', path: '/autorizado/history-component/'+this.userId, role: 'Estudiante', icon: 'pi pi-book' },
       { label: 'Citas Programadas', path: '/autorizado/citas-programadas', role: 'Psicologo', icon: 'pi pi-calendar' },
       { label: 'Citas Programadas', path: '/autorizado/citas-programadas', role: 'Estudiante', icon: 'pi pi-calendar' },

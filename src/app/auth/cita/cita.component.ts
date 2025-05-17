@@ -119,7 +119,7 @@ export class CitaComponent {
         ,solicitadoPor:this.authService.getUserFromToken().Nombre+" "+this.authService.getUserFromToken().Apellido}
       this.citaService.createCita(this.newcitaForm).subscribe(
         (data:any)=>{
-            nuevaCita.citaId=data.citaID
+            nuevaCita.citaId=data
             console.log(nuevaCita)
             this.citas = [nuevaCita,...this.citas];
             this.mensajeService.addMessage({summary:"La cita se ha creado correctamente",severity:"success"})
